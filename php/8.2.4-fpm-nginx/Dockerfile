@@ -1,0 +1,54 @@
+# 使用官方 PHP 8.2.4 镜像作为基础镜像
+FROM php:8.2.4-fpm-alpine
+
+#Author
+LABEL maintainer="Linfeiyang"
+#Email
+LABEL email="linfeiyang000@gmail.com"
+
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+
+# 安装nginx
+RUN apk add --no-cache nginx
+
+# 覆盖配置文件
+COPY ./build/nginx.conf /etc/nginx/nginx.conf
+
+# 安装一些必要的扩展
+
+RUN apk add --no-cache $PHPIZE_DEPS
+RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
+
+RUN docker-php-ext-install pdo_mysql
+
+RUN docker-php-ext-install bcmath
+
+RUN apk add --no-cache \
+        libjpeg-turbo-dev \
+        libpng-dev \
+        libwebp-dev \
+        freetype-dev
+
+RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
+
+RUN docker-php-ext-install gd 
+
+# 安装 Composer，并将 Composer 的全局安装路径添加到 PATH 环境变量中
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc \
+    && source ~/.bashrc
+
+# 设置容器的默认工作目录为 /var/www/html
+WORKDIR /var/www/html
+
+#设置var目录权限
+RUN chown -R www-data:www-data /var/lib/nginx
+
+# 复制run.sh文件到容器中
+COPY ./build/run.sh /run.sh
+
+#清除apk cache
+RUN rm -rf /var/cache/apk/*
+
+# 后台启动php-fpm 并前台运行nginx
+CMD ["sh", "/run.sh"]
