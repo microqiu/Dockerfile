@@ -24,7 +24,7 @@ jobs:
       -
         name: info
         run: |
-          ls
+          pwd
       -
         name: Build and push
         id: docker_build
