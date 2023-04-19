@@ -26,6 +26,6 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: ./php/
+          context: ./php/8.2.4-fpm-nginx/
           push: true
           tags: user/app:latest
