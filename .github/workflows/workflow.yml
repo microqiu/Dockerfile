@@ -28,4 +28,4 @@ jobs:
         with:
           context: ./php/8.2.4-fpm-nginx/
           push: true
-          tags: user/app:latest
+          tags: linfeiyang/php:php-8.2.4-fpm-nginx
