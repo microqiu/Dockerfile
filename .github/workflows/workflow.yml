@@ -6,7 +6,7 @@ on:
       - 'master'
 
 jobs:
-  docker-go1.20:
+  docker:
     runs-on: ubuntu-latest
     steps:
       -
@@ -31,7 +31,7 @@ jobs:
           context: ./docker/go-1.20/
           push: true
           tags: linfeiyang/docker:go1.20
-  php-8.2.4-fpm-nginx:
+  php:
     runs-on: ubuntu-latest
     steps:
       -
