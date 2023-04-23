@@ -33,10 +33,10 @@ RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 
 RUN docker-php-ext-install gd
 
-RUN apk add --no-cache imagemagick-dev imagemagick \
+RUN apk add --update --no-cache autoconf g++ imagemagick imagemagick-dev libtool make pcre-dev \
     && pecl install imagick \
     && docker-php-ext-enable imagick \
-    && apk del .build-deps
+    && apk del autoconf g++ libtool make pcre-dev
 
 # 安装 Composer，并将 Composer 的全局安装路径添加到 PATH 环境变量中
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
