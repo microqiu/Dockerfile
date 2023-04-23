@@ -31,7 +31,12 @@ RUN apk add --no-cache \
 
 RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 
-RUN docker-php-ext-install gd 
+RUN docker-php-ext-install gd
+
+RUN apk add --no-cache imagemagick-dev imagemagick \
+    && pecl install imagick \
+    && docker-php-ext-enable imagick \
+    && apk del .build-deps
 
 # 安装 Composer，并将 Composer 的全局安装路径添加到 PATH 环境变量中
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
@@ -52,8 +57,6 @@ RUN rm -rf /var/cache/apk/*
 
 # 设置时区
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
-RUN docker-php-ext-install imagick
 
 # 后台启动php-fpm 并前台运行nginx
 CMD ["sh", "/run.sh"]
