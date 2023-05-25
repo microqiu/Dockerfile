@@ -38,6 +38,11 @@ RUN apk add --update --no-cache autoconf g++ imagemagick imagemagick-dev libtool
     && docker-php-ext-enable imagick \
     && apk del autoconf g++ libtool make pcre-dev
 
+# 添加ziparchive扩展
+RUN apk add --no-cache libzip-dev \
+    && docker-php-ext-configure zip \
+    && docker-php-ext-install zip
+
 # 安装 Composer，并将 Composer 的全局安装路径添加到 PATH 环境变量中
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc \
