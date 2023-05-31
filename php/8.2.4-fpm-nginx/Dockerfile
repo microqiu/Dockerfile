@@ -14,6 +14,9 @@ RUN apk add --no-cache nginx
 # 覆盖配置文件
 COPY ./build/nginx.conf /etc/nginx/nginx.conf
 
+# 添加php.ini到/usr/local/etc/php
+COPY ./php.ini /usr/local/etc/php/php.ini
+
 # 安装一些必要的扩展
 
 RUN apk add --no-cache $PHPIZE_DEPS
