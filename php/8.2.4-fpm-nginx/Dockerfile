@@ -63,8 +63,8 @@ COPY ./build/run.sh /run.sh
 #清除apk cache
 RUN rm -rf /var/cache/apk/*
 
-# 设置时区
-RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # 后台启动php-fpm 并前台运行nginx
 CMD ["sh", "/run.sh"]
