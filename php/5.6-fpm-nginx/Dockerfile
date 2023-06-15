@@ -61,5 +61,7 @@ RUN rm -rf /var/cache/apk/*
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+RUN mkdir /run/nginx
+
 # 后台启动php-fpm 并前台运行nginx
 CMD ["sh", "/run.sh"]
