@@ -46,11 +46,6 @@ RUN apk add --no-cache libzip-dev \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip
 
-# 安装 Composer，并将 Composer 的全局安装路径添加到 PATH 环境变量中
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc \
-    && source ~/.bashrc
-
 # 设置容器的默认工作目录为 /var/www/html
 WORKDIR /var/www/html
 
