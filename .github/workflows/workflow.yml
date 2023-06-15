@@ -56,4 +56,11 @@ jobs:
           context: ./php/8.2.4-fpm-nginx/
           push: true
           tags: linfeiyang/php:php-8.2.4-fpm-nginx
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: ./php/5.6-fpm-nginx/
+          push: true
+          tags: linfeiyang/php:php-5.6-fpm-nginx
    
