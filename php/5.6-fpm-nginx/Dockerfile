@@ -20,12 +20,9 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 # 安装一些必要的扩展
 
 
-RUN cd /bin/
-RUN wget http://pear.php.net/go-pear.phar -O go-pear.php
-RUN php go-pear.php
-
-
-RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
+RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
+&& pecl install redis \
+  && docker-php-ext-enable redis 
 
 RUN docker-php-ext-install pdo_mysql
 
