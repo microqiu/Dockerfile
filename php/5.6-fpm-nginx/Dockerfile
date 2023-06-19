@@ -1,5 +1,5 @@
 # 使用官方 php:5.6 镜像作为基础镜像
-FROM php:5.6-fpm
+FROM php:5.6-fpm-alpine
 
 #Author
 LABEL maintainer="Linfeiyang"
@@ -18,9 +18,11 @@ COPY ./build/nginx.conf /etc/nginx/nginx.conf
 COPY ./php.ini /usr/local/etc/php/php.ini
 
 # 安装一些必要的扩展
-RUN pecl install -o -f redis \
-&&  rm -rf /tmp/pear \
-&&  docker-php-ext-enable redis
+RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/2.2.7.tar.gz \
+    && tar xfz /tmp/redis.tar.gz \
+    && rm -r /tmp/redis.tar.gz \
+    && mv phpredis-2.2.7 /usr/src/php/ext/redis \
+    && docker-php-ext-install redis
 
 RUN docker-php-ext-install pdo_mysql
 
