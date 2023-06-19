@@ -9,7 +9,7 @@ LABEL email="linfeiyang000@gmail.com"
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 # 安装nginx
-RUN apk add --no-cache nginx
+RUN apk add --no-cache nginx wget
 
 # 覆盖配置文件
 COPY ./build/nginx.conf /etc/nginx/nginx.conf
