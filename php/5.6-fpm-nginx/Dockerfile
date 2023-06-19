@@ -9,7 +9,7 @@ LABEL email="linfeiyang000@gmail.com"
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 # 安装nginx
-RUN apk add --no-cache nginx
+RUN apk add --no-cache nginx pecl
 
 # 覆盖配置文件
 COPY ./build/nginx.conf /etc/nginx/nginx.conf
@@ -18,11 +18,8 @@ COPY ./build/nginx.conf /etc/nginx/nginx.conf
 COPY ./php.ini /usr/local/etc/php/php.ini
 
 # 安装一些必要的扩展
-RUN curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/2.2.7.tar.gz \
-    && tar xfz /tmp/redis.tar.gz \
-    && rm -r /tmp/redis.tar.gz \
-    && mv phpredis-2.2.7 /usr/src/php/ext/redis \
-    && docker-php-ext-install redis
+
+RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
 
 RUN docker-php-ext-install pdo_mysql
 
