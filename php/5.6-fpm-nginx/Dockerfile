@@ -9,7 +9,7 @@ LABEL email="linfeiyang000@gmail.com"
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 # 安装nginx
-RUN apk add --no-cache nginx pecl
+RUN apk add --no-cache nginx
 
 # 覆盖配置文件
 COPY ./build/nginx.conf /etc/nginx/nginx.conf
@@ -18,6 +18,9 @@ COPY ./build/nginx.conf /etc/nginx/nginx.conf
 COPY ./php.ini /usr/local/etc/php/php.ini
 
 # 安装一些必要的扩展
+
+RUN wget http://pear.php.net/go-pear.phar -O go-pear.php
+RUN php go-pear.php
 
 RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
 
