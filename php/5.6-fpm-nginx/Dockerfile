@@ -18,7 +18,8 @@ COPY ./build/nginx.conf /etc/nginx/nginx.conf
 COPY ./php.ini /usr/local/etc/php/php.ini
 
 # 安装一些必要的扩展
-RUN pecl install -o -f redis-4.3.0 && rm -rf /tmp/pear && docker-php-ext-enable redis
+RUN pecl install -o -f redis-4.3.0
+RUN docker-php-ext-enable redis
 
 RUN docker-php-ext-install pdo_mysql
 
