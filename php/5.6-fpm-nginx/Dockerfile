@@ -21,7 +21,7 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 
 
 RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
-&& pecl install redis \
+&& pecl -o -f install redis \
   && docker-php-ext-enable redis 
 
 RUN docker-php-ext-install pdo_mysql
