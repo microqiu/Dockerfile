@@ -1,5 +1,5 @@
 # 使用官方 php:5.6 镜像作为基础镜像
-FROM php:5.6-fpm-alpine
+FROM php:5.6-fpm
 
 #Author
 LABEL maintainer="Linfeiyang"
