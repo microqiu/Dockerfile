@@ -65,5 +65,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN mkdir /run/nginx
 
+RUN chmod -R 777 /var/tmp
+
 # 后台启动php-fpm 并前台运行nginx
 CMD ["sh", "/run.sh"]
