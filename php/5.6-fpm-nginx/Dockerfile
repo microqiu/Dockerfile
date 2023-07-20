@@ -1,5 +1,5 @@
 # 使用官方 PHP 8.2.4 镜像作为基础镜像
-FROM php:7.0.0-fpm-alpine
+FROM php:7.0.4-fpm-alpine
 
 #Author
 LABEL maintainer="Linfeiyang"
