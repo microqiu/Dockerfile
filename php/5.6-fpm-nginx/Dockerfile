@@ -45,7 +45,7 @@ RUN pecl install imagick-3.7.0.tgz \
 
 RUN apk add --update 
 # 添加ziparchive扩展
-RUN apk add --no-cache libzip-dev --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community && docker-php-ext-configure zip --with-libzip=/usr/include && docker-php-ext-install zip
+RUN apk add --no-cache libzip-dev --allow-untrusted --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community && docker-php-ext-configure zip --with-libzip=/usr/include && docker-php-ext-install zip
 
 # 设置容器的默认工作目录为 /var/www/html
 WORKDIR /var/www/html
