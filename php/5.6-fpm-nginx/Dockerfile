@@ -20,16 +20,16 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 # 安装一些必要的扩展
 
 
-RUN apk update \
-    && apk add --no-cache --virtual .build-deps \
-        autoconf \
-        g++ \
-        make \
-        zlib-dev \
-        hiredis-dev \
-    && pecl install redis \
-    && docker-php-ext-enable redis \
-    && apk del .build-deps
+RUN apk update
+RUN apk add .build-deps 
+RUN apk add autoconf 
+RUN apk add g++ 
+RUN apk add make 
+RUN apk add zlib-dev 
+RUN apk add hiredis-dev 
+RUN apk add pecl install redis 
+RUN apk add docker-php-ext-enable redis 
+RUN apk add apk del .build-deps
 
 RUN docker-php-ext-install pdo_mysql
 
