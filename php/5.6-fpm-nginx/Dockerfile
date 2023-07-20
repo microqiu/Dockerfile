@@ -28,7 +28,7 @@ RUN apk add zlib-dev
 RUN apk add hiredis-dev 
 RUN wget https://pecl.php.net/get/redis-2.2.3.tgz
 RUN pecl install redis-2.2.3.tgz 
-RUN apk add docker-php-ext-enable redis 
+RUN docker-php-ext-enable redis 
 
 RUN docker-php-ext-install pdo_mysql
 
