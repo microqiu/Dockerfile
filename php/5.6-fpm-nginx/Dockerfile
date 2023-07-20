@@ -44,6 +44,10 @@ RUN pecl install imagick-3.7.0.tgz \
     && docker-php-ext-enable imagick \
     && apk del autoconf g++ libtool make pcre-dev
 
+
+RUN apk add --update \
+--repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+--repository http://dl-cdn.alpinelinux.org/alpine/edge/community 
 # 添加ziparchive扩展
 RUN apk add --no-cache libzip-dev \
     && docker-php-ext-configure zip \
