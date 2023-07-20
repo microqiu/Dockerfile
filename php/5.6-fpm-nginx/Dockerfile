@@ -49,7 +49,7 @@ RUN apk add --update \
 --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
 --repository http://dl-cdn.alpinelinux.org/alpine/edge/community 
 # 添加ziparchive扩展
-RUN RUN apk add --no-cache zip libzip-dev
+RUN apk add --no-cache zip libzip-dev
 RUN docker-php-ext-configure zip --with-libzip 
 RUN docker-php-ext-install zip
 
