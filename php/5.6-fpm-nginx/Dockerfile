@@ -6,8 +6,6 @@ LABEL maintainer="Linfeiyang"
 #Email
 LABEL email="linfeiyang000@gmail.com"
 
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
-
 # 安装nginx
 RUN apk add --no-cache nginx
 
@@ -45,9 +43,7 @@ RUN pecl install imagick-3.7.0.tgz \
     && apk del autoconf g++ libtool make pcre-dev
 
 
-RUN apk add --update \
---repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
---repository http://dl-cdn.alpinelinux.org/alpine/edge/community 
+RUN apk add --update 
 # 添加ziparchive扩展
 RUN apk add --no-cache libzip-dev && docker-php-ext-configure zip --with-libzip=/usr/include && docker-php-ext-install zip
 
