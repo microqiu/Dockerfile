@@ -26,9 +26,8 @@ RUN apk add g++
 RUN apk add make 
 RUN apk add zlib-dev 
 RUN apk add hiredis-dev 
-RUN apk add pecl install redis 
+RUN pecl install redis 
 RUN apk add docker-php-ext-enable redis 
-RUN apk add apk del .build-deps
 
 RUN docker-php-ext-install pdo_mysql
 
