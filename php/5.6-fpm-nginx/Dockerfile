@@ -6,8 +6,9 @@ LABEL maintainer="Linfeiyang"
 #Email
 LABEL email="linfeiyang000@gmail.com"
 
+RUN apt-get update
 # 安装nginx
-RUN apt install nginx
+RUN apt-get install nginx
 
 # 覆盖配置文件
 COPY ./build/nginx.conf /etc/nginx/nginx.conf
