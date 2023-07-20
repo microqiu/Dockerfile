@@ -62,7 +62,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: ./php/5.6-fpm-nginx/
+          context: ./php/7.0.33-fpm-nginx/
           push: true
-          tags: linfeiyang/php:php-5.6-fpm-nginx
+          tags: linfeiyang/php:php-7.0.33-fpm-nginx
    
