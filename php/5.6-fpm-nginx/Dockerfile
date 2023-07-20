@@ -30,6 +30,8 @@ RUN wget https://pecl.php.net/get/redis-2.2.3.tgz
 RUN pecl install redis-2.2.3.tgz 
 RUN docker-php-ext-enable redis 
 
+# del
+
 RUN docker-php-ext-install pdo_mysql
 
 RUN docker-php-ext-install bcmath
@@ -44,15 +46,20 @@ RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 
 RUN docker-php-ext-install gd
 
-RUN apk add --update --no-cache autoconf g++ imagemagick imagemagick-dev libtool make pcre-dev \
-    && pecl install imagick \
-    && docker-php-ext-enable imagick \
+RUN apk add --update --no-cache autoconf g++ imagemagick imagemagick-dev libtool make pcre-dev
+RUN wget https://pecl.php.net/get/imagick-3.1.0.tgz
+RUN pecl install imagick-3.1.0.tgz
+RUN docker-php-ext-enable imagick \
     && apk del autoconf g++ libtool make pcre-dev
+
+
 
 # 添加ziparchive扩展
 RUN apk add --no-cache libzip-dev \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip
+
+RUN RUN apk del autoconf g++ make zlib-dev hiredis-dev libjpeg-turbo-dev libpng-dev libwebp-dev freetype-dev imagemagick-dev libtool pcre-dev
 
 # 设置容器的默认工作目录为 /var/www/html
 WORKDIR /var/www/html
