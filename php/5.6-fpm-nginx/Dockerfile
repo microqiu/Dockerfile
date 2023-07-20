@@ -20,10 +20,7 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 # 安装一些必要的扩展
 
 RUN apk add --no-cache $PHPIZE_DEPS
-RUN pecl update-channels
-RUN rm -rf /tmp/pear ~/.pearrc
-RUN wget https://pecl.php.net/get/redis-5.3.7.tgz
-RUN pecl install -o -f redis && rm -rf /tmp/pear && docker-php-ext-enable redis
+RUN pecl install redis-5.3.7.tgz && docker-php-ext-enable redis
 
 RUN docker-php-ext-install pdo_mysql
 
