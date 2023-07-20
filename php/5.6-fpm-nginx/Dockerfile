@@ -1,5 +1,5 @@
 # 使用官方 PHP 8.2.4 镜像作为基础镜像
-FROM php:7.0.4-fpm-alpine
+FROM php:7.0.33-fpm
 
 #Author
 LABEL maintainer="Linfeiyang"
@@ -7,7 +7,7 @@ LABEL maintainer="Linfeiyang"
 LABEL email="linfeiyang000@gmail.com"
 
 # 安装nginx
-RUN apk add --no-cache nginx
+RUN apt install nginx
 
 # 覆盖配置文件
 COPY ./build/nginx.conf /etc/nginx/nginx.conf
@@ -17,35 +17,20 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 
 # 安装一些必要的扩展
 
-RUN apk add --no-cache $PHPIZE_DEPS
-RUN wget https://pecl.php.net/get/redis-5.3.7.tgz
-RUN pecl install redis-5.3.7.tgz
+RUN pecl install redis
 RUN docker-php-ext-enable redis
 
 RUN docker-php-ext-install pdo_mysql
-
 RUN docker-php-ext-install bcmath
+#RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
+#RUN docker-php-ext-install gd
 
-RUN apk add --no-cache \
-        libjpeg-turbo-dev \
-        libpng-dev \
-        libwebp-dev \
-        freetype-dev
-RUN apk add --update --no-cache autoconf g++ imagemagick imagemagick-dev libtool make pcre-dev 
-
-RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
-
-RUN docker-php-ext-install gd
-
-RUN wget https://pecl.php.net/get/imagick-3.7.0.tgz
-RUN pecl install imagick-3.7.0.tgz \
-    && docker-php-ext-enable imagick \
-    && apk del autoconf g++ libtool make pcre-dev
+RUN pecl install imagick
+RUN docker-php-ext-enable imagick 
 
 
-RUN apk add --update 
 # 添加ziparchive扩展
-RUN apk add --no-cache libressl2.7-libcrypto libzip-dev --allow-untrusted --repository=https://dl-cdn.alpinelinux.org/alpine/edge/community && docker-php-ext-configure zip --with-libzip=/usr/include && docker-php-ext-install zip
+RUN docker-php-ext-configure zip && docker-php-ext-install zip
 
 # 设置容器的默认工作目录为 /var/www/html
 WORKDIR /var/www/html
@@ -57,7 +42,6 @@ RUN chown -R www-data:www-data /var/lib/nginx
 COPY ./build/run.sh /run.sh
 
 #清除apk cache
-RUN rm -rf /var/cache/apk/*
 
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
