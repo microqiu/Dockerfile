@@ -51,13 +51,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      -
-        name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: ./php/8.2.4-fpm-nginx/
-          push: true
-          tags: linfeiyang/php:php-8.2.4-fpm-nginx
+      #-
+      #  name: Build and push
+      #  uses: docker/build-push-action@v4
+      #  with:
+      #    context: ./php/8.2.4-fpm-nginx/
+      #    push: true
+      #    tags: linfeiyang/php:php-8.2.4-fpm-nginx
       -
         name: Build and push
         uses: docker/build-push-action@v4

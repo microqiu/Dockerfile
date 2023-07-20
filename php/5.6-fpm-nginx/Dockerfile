@@ -20,9 +20,16 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 # 安装一些必要的扩展
 
 
-RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} \
-&& pecl -o -f install redis \
-  && docker-php-ext-enable redis 
+RUN apk update \
+    && apk add --no-cache --virtual .build-deps \
+        autoconf \
+        g++ \
+        make \
+        zlib-dev \
+        hiredis-dev \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
+    && apk del .build-deps
 
 RUN docker-php-ext-install pdo_mysql
 
