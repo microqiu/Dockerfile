@@ -50,7 +50,7 @@ RUN apk add --update \
 --repository http://dl-cdn.alpinelinux.org/alpine/edge/community 
 # 添加ziparchive扩展
 RUN apk add --no-cache libzip-dev \
-    && docker-php-ext-configure zip \
+    && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install zip
 
 # 设置容器的默认工作目录为 /var/www/html
