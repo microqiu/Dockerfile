@@ -21,7 +21,6 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 
 
 RUN apk update
-RUN apk add .build-deps 
 RUN apk add autoconf 
 RUN apk add g++ 
 RUN apk add make 
