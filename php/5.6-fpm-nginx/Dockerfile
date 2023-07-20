@@ -20,6 +20,7 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 # 安装一些必要的扩展
 
 RUN apk add --no-cache $PHPIZE_DEPS
+RUN wget https://pecl.php.net/get/redis-5.3.7.tgz
 RUN pecl install redis-5.3.7.tgz
 RUN docker-php-ext-enable redis
 
