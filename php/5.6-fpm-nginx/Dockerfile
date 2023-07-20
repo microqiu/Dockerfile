@@ -40,7 +40,7 @@ RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 RUN docker-php-ext-install gd
 
 RUN wget https://pecl.php.net/get/imagick-3.7.0.tgz
-RUN pecl install imagemagick-3.7.0.tgz \
+RUN pecl install imagick-3.7.0.tgz \
     && docker-php-ext-enable imagick \
     && apk del autoconf g++ libtool make pcre-dev
 
