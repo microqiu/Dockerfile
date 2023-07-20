@@ -33,8 +33,7 @@ RUN apk add --no-cache \
         libpng-dev \
         libwebp-dev \
         freetype-dev
-RUN apk add --update --no-cache autoconf g++ imagemagick imagemagick-dev libtool make pcre-dev \
-
+RUN apk add --update --no-cache autoconf g++ imagemagick imagemagick-dev libtool make pcre-dev 
 
 RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 
