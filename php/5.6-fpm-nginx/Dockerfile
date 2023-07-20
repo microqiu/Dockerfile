@@ -6,6 +6,8 @@ LABEL maintainer="Linfeiyang"
 #Email
 LABEL email="linfeiyang000@gmail.com"
 
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
+
 RUN apt-get update
 # 安装nginx
 RUN apt-get install nginx
@@ -17,7 +19,6 @@ COPY ./build/nginx.conf /etc/nginx/nginx.conf
 COPY ./php.ini /usr/local/etc/php/php.ini
 
 # 安装一些必要的扩展
-RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
 RUN pecl install redis
 RUN docker-php-ext-enable redis
 
