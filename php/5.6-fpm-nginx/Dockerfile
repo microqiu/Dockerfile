@@ -10,7 +10,7 @@ RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.
 
 RUN apt-get update
 # 安装nginx
-RUN apt-get install nginx
+RUN apt-get install nginx -y
 
 # 覆盖配置文件
 COPY ./build/nginx.conf /etc/nginx/nginx.conf
