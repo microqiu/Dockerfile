@@ -20,7 +20,8 @@ COPY ./php.ini /usr/local/etc/php/php.ini
 # 安装一些必要的扩展
 
 RUN apk add --no-cache $PHPIZE_DEPS
-RUN pecl install redis-5.3.7.tgz && docker-php-ext-enable redis
+RUN pecl install redis-5.3.7.tgz
+RUN docker-php-ext-enable redis
 
 RUN docker-php-ext-install pdo_mysql
 
@@ -31,13 +32,14 @@ RUN apk add --no-cache \
         libpng-dev \
         libwebp-dev \
         freetype-dev
+RUN apk add --update --no-cache autoconf g++ imagemagick imagemagick-dev libtool make pcre-dev \
+
 
 RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 
 RUN docker-php-ext-install gd
 
-RUN apk add --update --no-cache autoconf g++ imagemagick imagemagick-dev libtool make pcre-dev \
-    && pecl install imagick \
+RUN pecl install imagick \
     && docker-php-ext-enable imagick \
     && apk del autoconf g++ libtool make pcre-dev
 
