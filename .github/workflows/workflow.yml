@@ -51,6 +51,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: ./php/5.6-fpm-nginx/
+          push: true
+          tags: linfeiyang/php:php-5.6-fpm-nginx
       #-
       #  name: Build and push
       #  uses: docker/build-push-action@v4
@@ -65,11 +72,5 @@ jobs:
       #    context: ./php/7.0.33-fpm-nginx/
       #    push: true
       #    tags: linfeiyang/php:php-7.0.33-fpm-nginx
-       -
-        name: Build and push
-        uses: docker/build-push-action@v4
-        with:
-          context: ./php/5.6-fpm-nginx/
-          push: true
-          tags: linfeiyang/php:php-5.6-fpm-nginx
+       
    
