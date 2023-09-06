@@ -9,9 +9,7 @@ LABEL email="linfeiyang000@gmail.com"
 RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
 
 RUN apt-get update
-RUN apt-get install libzip-dev \
-    zlib1g-dev \
-    php5.6-dev
+
 # 安装nginx
 RUN apt-get install nginx -y
 
@@ -22,9 +20,9 @@ COPY ./build/nginx.conf /etc/nginx/nginx.conf
 #COPY ./php.ini /usr/local/etc/php/php.ini
 
 # 安装一些必要的扩展
-RUN mkdir -p /usr/src/php/ext/redis \
-    && curl --insecure -L https://pecl.php.net/get/redis | tar xvz -C /usr/src/php/ext/redis --strip 1 \
-    && docker-php-ext-install redis
+RUN wget http://pecl.php.net/get/redis-4.2.0.tgz
+RUN tar -zxvf redis-4.2.0.tgz && cd redis-4.2.0 && phpize && ./configure && make && make install
+RUN docker-php-ext-enable redis
 
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install bcmath
