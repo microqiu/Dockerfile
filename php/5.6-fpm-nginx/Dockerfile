@@ -28,9 +28,7 @@ RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install bcmath
 #RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 #RUN docker-php-ext-install gd
-RUN apt-get install libmagickwand-dev libmagickcore-dev imagemagick -y 
-RUN wget --no-check-certificate https://pecl.php.net/get/imagick-3.0.0.tgz
-RUN tar -zxvf imagick-3.0.0.tgz && cd imagick-3.0.0 && phpize && ./configure --with-imagick=/usr/local/imagemagick && make && make install
+RUN pecl install imagick-beta
 RUN docker-php-ext-enable imagick
 
 # 添加ziparchive扩展
