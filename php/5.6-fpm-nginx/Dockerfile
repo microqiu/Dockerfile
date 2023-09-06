@@ -26,7 +26,7 @@ RUN tar -zxvf redis-4.2.0.tgz && cd redis-4.2.0 && phpize && ./configure && make
 RUN docker-php-ext-enable redis
 
 # imagick
-RUN apt-get install -y libmagickwand-dev libmagickcore-dev imagick
+RUN apt-get install -y libmagickwand-dev libmagickcore-dev
 RUN wget http://pecl.php.net/get/imagick-3.4.4.tgz
 RUN tar -zxvf imagick-3.4.4.tgz && cd imagick-3.4.4 && phpize && ./configure --prefix=/usr/local/imagemagick && make && make install
 RUN docker-php-ext-enable redis
