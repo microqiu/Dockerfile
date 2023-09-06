@@ -8,7 +8,10 @@ LABEL email="linfeiyang000@gmail.com"
 
 RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
 
-RUN apt-get update
+RUN apt-get update \
+    libzip-dev \
+    zlib1g-dev \
+    php5.6-dev
 # 安装nginx
 RUN apt-get install nginx -y
 
