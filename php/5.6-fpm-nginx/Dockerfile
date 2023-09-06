@@ -6,6 +6,9 @@ LABEL maintainer="Linfeiyang"
 #Email
 LABEL email="linfeiyang000@gmail.com"
 
+
+RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+
 RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
 
 RUN apt-get update
