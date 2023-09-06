@@ -19,8 +19,9 @@ COPY ./build/nginx.conf /etc/nginx/nginx.conf
 #COPY ./php.ini /usr/local/etc/php/php.ini
 
 # 安装一些必要的扩展
-RUN pecl install redis
-RUN docker-php-ext-enable redis
+RUN mkdir -p /usr/src/php/ext/redis \
+    && curl -L https://pecl.php.net/get/redis | tar xvz -C /usr/src/php/ext/redis --strip 1 \
+    && docker-php-ext-install redis
 
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install bcmath
