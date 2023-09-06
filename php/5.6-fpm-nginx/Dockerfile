@@ -29,6 +29,7 @@ RUN docker-php-ext-enable redis
 RUN apt-get install -y libmagickwand-dev libmagickcore-dev imagick
 RUN wget http://pecl.php.net/get/imagick-3.4.4.tgz
 RUN tar -zxvf imagick-3.4.4.tgz && cd imagick-3.4.4 && phpize && ./configure --prefix=/usr/local/imagemagick && make && make install
+RUN docker-php-ext-enable redis
 
 
 RUN docker-php-ext-install pdo_mysql
