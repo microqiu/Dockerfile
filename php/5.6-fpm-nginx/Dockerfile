@@ -24,12 +24,18 @@ RUN apt-get install wget -y
 RUN wget http://pecl.php.net/get/redis-4.2.0.tgz
 RUN tar -zxvf redis-4.2.0.tgz && cd redis-4.2.0 && phpize && ./configure && make && make install
 RUN docker-php-ext-enable redis
+
+# imagick
+RUN apt-get install -y libmagickwand-dev libmagickcore-dev imagick
+RUN wget http://pecl.php.net/get/imagick-3.4.4.tgz
+RUN tar -zxvf imagick-3.4.4.tgz && cd imagick-3.4.4 && phpize && ./configure --prefix=/usr/local/imagemagick && make && make install
+
+
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install bcmath
 #RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 #RUN docker-php-ext-install gd
-RUN pecl version
-RUN apt-get install php-imagick -y
+
 
 # 添加ziparchive扩展
 RUN docker-php-ext-configure zip && docker-php-ext-install zip
