@@ -20,7 +20,7 @@ COPY ./build/nginx.conf /etc/nginx/nginx.conf
 
 # 安装一些必要的扩展
 RUN mkdir -p /usr/src/php/ext/redis \
-    && curl -L https://pecl.php.net/get/redis | tar xvz -C /usr/src/php/ext/redis --strip 1 \
+    && curl --insecure -L https://pecl.php.net/get/redis | tar xvz -C /usr/src/php/ext/redis --strip 1 \
     && docker-php-ext-install redis
 
 RUN docker-php-ext-install pdo_mysql
