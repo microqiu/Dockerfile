@@ -29,8 +29,7 @@ RUN docker-php-ext-install bcmath
 #RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 #RUN docker-php-ext-install gd
 RUN pecl version
-RUN pecl install imagick-beta
-RUN docker-php-ext-enable imagick
+RUN apt-get install php-imagick -y
 
 # 添加ziparchive扩展
 RUN docker-php-ext-configure zip && docker-php-ext-install zip
