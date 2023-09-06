@@ -23,7 +23,7 @@ COPY ./build/nginx.conf /etc/nginx/nginx.conf
 RUN wget http://pecl.php.net/get/redis-4.2.0.tgz
 RUN tar -zxvf redis-4.2.0.tgz && cd redis-4.2.0 && phpize && ./configure && make && make install
 RUN docker-php-ext-enable redis
-
+RUN apt-get install wget -y
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install bcmath
 #RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
