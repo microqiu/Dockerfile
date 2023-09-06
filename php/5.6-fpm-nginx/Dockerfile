@@ -30,7 +30,7 @@ RUN docker-php-ext-install bcmath
 #RUN docker-php-ext-install gd
 RUN apt-get install libmagickwand-dev libmagickcore-dev imagemagick -y 
 RUN wget --no-check-certificate https://pecl.php.net/get/imagick-3.0.0.tgz
-RUN tar -zxvf imagick-3.0.0.tgz && cd imagick-3.0.0 && phpize && ./configure && make && make install
+RUN tar -zxvf imagick-3.0.0.tgz && cd imagick-3.0.0 && phpize && ./configure --with-imagick=/usr/local/imagemagick && make && make install
 RUN docker-php-ext-enable imagick
 
 # 添加ziparchive扩展
