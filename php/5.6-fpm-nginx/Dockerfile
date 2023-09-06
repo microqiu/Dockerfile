@@ -29,7 +29,7 @@ RUN docker-php-ext-install bcmath
 #RUN docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype
 #RUN docker-php-ext-install gd
 RUN apt-get install libmagickwand-dev imagemagick -y
-RUN wget imagick-3.0.0.tgz 
+RUN wget https://pecl.php.net/get/imagick-3.0.0.tgz
 RUN tar -zxvf imagick-3.0.0.tgz && cd imagick-3.0.0 && phpize && ./configure && make && make install
 RUN docker-php-ext-enable imagick 
 
