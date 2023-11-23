@@ -9,7 +9,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     # main 分支
-    if: github.ref == 'refs/heads/main'
+    # if: github.ref == 'refs/heads/main'
     steps:
       -
         name: Checkout
