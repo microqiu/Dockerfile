@@ -27,12 +27,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
-        name: Build and push
+        name: Build and push go
         uses: docker/build-push-action@v4
         with:
           context: ./docker/go-1.20/
           push: true
           tags: linfeiyang/docker:go1.20
+      -
+        name: Build and push curl
+        uses: docker/build-push-action@v4
+        with:
+          context: ./docker/curl/
+          push: true
+          tags: linfeiyang/docker:curl
   php:
     runs-on: ubuntu-latest
     steps:
