@@ -16,7 +16,7 @@ RUN apt-get install nginx -y
 # 覆盖配置文件
 COPY ./build/nginx.conf /etc/nginx/nginx.conf
 
-COPY ./php.ini /usr/local/etc/php/php.ini
+ADD ./php.ini /usr/local/etc/php/php.ini
 
 # 添加php.ini到/usr/local/etc/php
 #COPY ./php.ini /usr/local/etc/php/php.ini
