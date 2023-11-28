@@ -5,4 +5,4 @@ FROM node:21
 WORKDIR /app
 
 # 安装 Puppeteer 依赖
-RUN cd /app && npm install puppeteer
+RUN cd /app && npm install puppeteer@19.8.0
