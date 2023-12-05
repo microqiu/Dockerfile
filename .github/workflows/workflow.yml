@@ -8,6 +8,7 @@ on:
 jobs:
   puppeteer:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     steps:
       -
         name: Checkout
@@ -34,7 +35,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     # main 分支
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     steps:
       -
         name: Checkout
@@ -58,13 +59,13 @@ jobs:
           context: ./docker/go-1.20/
           push: true
           tags: linfeiyang/docker:go1.20
-      -
-        name: Build and push curl
-        uses: docker/build-push-action@v4
-        with:
-          context: ./docker/curl/
-          push: true
-          tags: linfeiyang/docker:curl
+     # -
+      #  name: Build and push curl
+      #  uses: docker/build-push-action@v4
+      #  with:
+      #    context: ./docker/curl/
+      #    push: true
+      #    tags: linfeiyang/docker:curl
   php:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
