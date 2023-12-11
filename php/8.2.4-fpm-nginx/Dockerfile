@@ -42,7 +42,7 @@ RUN apk add --update --no-cache autoconf g++ imagemagick imagemagick-dev libtool
     && apk del autoconf g++ libtool make pcre-dev
 
 # 添加ziparchive扩展
-RUN apk add --no-cache libzip-dev \
+RUN apk add --no-cache libzip-dev tzdata \
     && docker-php-ext-configure zip \
     && docker-php-ext-install zip
 

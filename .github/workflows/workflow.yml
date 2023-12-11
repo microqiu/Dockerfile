@@ -8,7 +8,7 @@ on:
 jobs:
   puppeteer:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     steps:
       -
         name: Checkout
@@ -68,7 +68,7 @@ jobs:
       #    tags: linfeiyang/docker:curl
   php:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     steps:
       -
         name: Checkout
