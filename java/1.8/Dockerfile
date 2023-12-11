@@ -1,5 +1,5 @@
 # 使用 alpine 作为基础镜像
-FROM alpine:latest
+FROM docker:latest
 
 # 设置中科大源
 RUN echo "https://mirrors.ustc.edu.cn/alpine/latest-stable/main/" > /etc/apk/repositories \
